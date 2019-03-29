@@ -1,9 +1,9 @@
 package main
 
 import (
-// "image"
-// "image/color"
-// "math"
+	"image"
+	"image/color"
+	"math"
 )
 
 const (
@@ -16,6 +16,6 @@ const (
 	ASH_BLUE_CHANNEL  int = 7
 )
 
-// func SimpleBinary(img image.Image, sgray) image.RGBA {
-
-// }
+func SimpleBinary(img image.Image, sgray) image.RGBA {
+	
+}

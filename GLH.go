@@ -116,12 +116,71 @@ func GrayLevelStatWeightedMean(img image.Image) [256]int {
 	for k := 0; k < 256; k++ {
 		sgray[k] = 0
 	}
-	for i := 0; i < dy; i++ {
-		for j := 0; j < dx; j++ {
-			r, g, b, _ := GetFloat64RGBA(img, j, i)
-			var gray = int(r*0.299 + g*0.587 + b*0.114)
+	for i := 0; i < dx; i++ {
+		for j := 0; j < dy; j++ {
+			gary := GetIntGrayValueWeightedMean(img, i, j)
 			sgray[gray]++
 		}
 	}
 	return sgray
+}
+
+func GrayLevelStatAvg(img image.Image) [256]int {
+	dx, dy := GetImageBounds(img)
+	var sgray [256]int
+	for k := 0; k < 256; k++ {
+		sgray[k] = 0
+	}
+	for i := 0; i < dx; i++ {
+		for j := 0; j < dy; j++ {
+			gary := GetIntGrayValueAvg(img, i, j)
+			sgray[gray]++
+		}
+	}
+	return sgary
+}
+
+func GrayLevelStatMax(img image.Image) [256]int {
+	dx, dy := GetImageBounds(img)
+	var sgray [256]int
+	for k := 0; k < 256; k++ {
+		sgray[k] = 0
+	}
+	for i := 0; i < dx; i++ {
+		for j := 0; j < dy; j++ {
+			gary := GetIntGrayValueMax(img, i, j)
+			sgray[gray]++
+		}
+	}
+	return sgary
+}
+
+func GrayLevelStatRChannel(img image.Image) [256]int {
+	dx, dy := GetImageBounds(img)
+	var sgray [256]int
+	for k := 0; k < 256; k++ {
+		sgray[k] = 0
+	}
+	for i := 0; i < dx; i++ {
+		for j := 0; j < dy; j++ {
+			gary := GetIntGrayValueRChannel(img, i, j)
+			sgray[gray]++
+		}
+	}
+	return sgary
+}
+
+func GrayLevelStatGChannel(img image.Image) [256]int {
+	dx, dy := GetImageBounds(img)
+	var sgray [256]int
+	for k := 0; k < 256; k++ {
+		sgray[k] = 0
+	}
+	for i := 0; i < dx; i++ {
+		for j := 0; j < dy; j++ {
+			gary := GetIntGrayValueGChannel(img, i, j)
+			sgray[gray]++
+		}
+	}
+	return sgary
 }

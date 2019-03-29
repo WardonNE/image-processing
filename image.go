@@ -10,8 +10,11 @@ import (
 	"os"
 )
 
-func NewImage(path string) (image.Image, error) {
+func (this *Myerror) Error() {
 
+}
+
+func NewImage(path string) (image.Image, error) {
 	if f, err := ioutil.ReadFile(path); err == nil {
 		b := bytes.NewBuffer(f)
 		if pic, err := jpeg.Decode(b); err == nil {
