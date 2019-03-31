@@ -118,7 +118,7 @@ func GrayLevelStatWeightedMean(img image.Image) [256]int {
 	}
 	for i := 0; i < dx; i++ {
 		for j := 0; j < dy; j++ {
-			gary := GetIntGrayValueWeightedMean(img, i, j)
+			gray := GetIntGrayValueWeightedMean(img, i, j)
 			sgray[gray]++
 		}
 	}
@@ -133,11 +133,11 @@ func GrayLevelStatAvg(img image.Image) [256]int {
 	}
 	for i := 0; i < dx; i++ {
 		for j := 0; j < dy; j++ {
-			gary := GetIntGrayValueAvg(img, i, j)
+			gray := GetIntGrayValueAvg(img, i, j)
 			sgray[gray]++
 		}
 	}
-	return sgary
+	return sgray
 }
 
 func GrayLevelStatMax(img image.Image) [256]int {
@@ -148,11 +148,11 @@ func GrayLevelStatMax(img image.Image) [256]int {
 	}
 	for i := 0; i < dx; i++ {
 		for j := 0; j < dy; j++ {
-			gary := GetIntGrayValueMax(img, i, j)
+			gray := GetIntGrayValueMax(img, i, j)
 			sgray[gray]++
 		}
 	}
-	return sgary
+	return sgray
 }
 
 func GrayLevelStatRChannel(img image.Image) [256]int {
@@ -163,11 +163,11 @@ func GrayLevelStatRChannel(img image.Image) [256]int {
 	}
 	for i := 0; i < dx; i++ {
 		for j := 0; j < dy; j++ {
-			gary := GetIntGrayValueRChannel(img, i, j)
+			gray := GetIntGrayValueRChannel(img, i, j)
 			sgray[gray]++
 		}
 	}
-	return sgary
+	return sgray
 }
 
 func GrayLevelStatGChannel(img image.Image) [256]int {
@@ -178,9 +178,9 @@ func GrayLevelStatGChannel(img image.Image) [256]int {
 	}
 	for i := 0; i < dx; i++ {
 		for j := 0; j < dy; j++ {
-			gary := GetIntGrayValueGChannel(img, i, j)
+			gray := GetIntGrayValueGChannel(img, i, j)
 			sgray[gray]++
 		}
 	}
-	return sgary
+	return sgray
 }

@@ -10,10 +10,6 @@ import (
 	"os"
 )
 
-func (this *Myerror) Error() {
-
-}
-
 func NewImage(path string) (image.Image, error) {
 	if f, err := ioutil.ReadFile(path); err == nil {
 		b := bytes.NewBuffer(f)

@@ -9,6 +9,7 @@ var (
 	filename string = "F:/GoWorkspace/bin/demo.jpg"
 	canvas   image.RGBA
 	dir      string = "F:/GoWorkspace/bin/images/"
+	mode            = ASH_WEIGHTED_MEAN
 )
 
 func main() {
@@ -80,4 +81,19 @@ func main() {
 	canvas = BChannelAsh(img)
 	SaveImage(dir+"bchannelash.png", canvas)
 	fmt.Println("Ash Picture Done!!")
+
+	var threshosd int
+	var sgray [256]int
+	fmt.Println("Starting Binary Picture...")
+	sgray = GrayLevelStatWeightedMean(img)
+	threshosd = DefaultThreshosd()
+	canvas = ImageBinary(img, threshosd, mode)
+	SaveImage(dir+"defaultbinaryzation.png", canvas)
+	threshosd = MeanThreshosd(sgray)
+	canvas = ImageBinary(img, threshosd, mode)
+	SaveImage(dir+"meanbinaryzation.png", canvas)
+	threshosd = TwoPeakThreshosd(sgray)
+	canvas = ImageBinary(img, threshosd, mode)
+	SaveImage(dir+"2peakbinaryzation.png", canvas)
+	fmt.Println("Binary Picture Done!!")
 }
