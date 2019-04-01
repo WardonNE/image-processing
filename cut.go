@@ -97,6 +97,9 @@ func SimpleCut(img image.Image, x int, y int, position int) image.RGBA {
 		} else {
 			x_offset = half_w - half_x
 		}
+		if y > height {
+			y = height
+		}
 		y_offset = 0
 	case position == POSITION_RIGHT_TOP:
 		if x > width {
@@ -104,6 +107,9 @@ func SimpleCut(img image.Image, x int, y int, position int) image.RGBA {
 			x = width
 		} else {
 			x_offset = width - x
+		}
+		if y > height {
+			y = height
 		}
 		y_offset = 0
 	case position == POSITION_LEFT_MIDDLE:

@@ -6,10 +6,12 @@ import (
 )
 
 var (
-	filename string = "F:/GoWorkspace/bin/demo.jpg"
-	canvas   image.RGBA
-	dir      string = "F:/GoWorkspace/bin/images/"
-	mode            = ASH_WEIGHTED_MEAN
+	filename string = "E:/goworkspace/bin/demo.jpg"
+	// filename string = "F:/GoWorkspace/bin/demo.jpg"
+	canvas image.RGBA
+	dir    string = "E:/goworkspace/bin/images/"
+	// dir    string = "F:/GoWorkspace/bin/images/"
+	mode = ASH_WEIGHTED_MEAN
 )
 
 func main() {
@@ -95,5 +97,15 @@ func main() {
 	threshosd = TwoPeakThreshosd(sgray)
 	canvas = ImageBinary(img, threshosd, mode)
 	SaveImage(dir+"2peakbinaryzation.png", canvas)
+	threshosd = IterationThreshosd(sgray, 2)
+	canvas = ImageBinary(img, threshosd, mode)
+	SaveImage(dir+"iterationbinaryzation.png", canvas)
+	mat := GetGrayMat(img, 4)
+	threshosd = SimpleCensusThreshosd(mat)
+	canvas = ImageBinary(img, threshosd, mode)
+	SaveImage(dir+"simplecensusbinaryzation.png", canvas)
+	threshosd = OstuThreshosd(sgray)
+	canvas = ImageBinary(img, threshosd, mode)
+	SaveImage(dir+"otsubinaryzation.png", canvas)
 	fmt.Println("Binary Picture Done!!")
 }

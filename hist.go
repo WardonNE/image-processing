@@ -52,17 +52,17 @@ func GetFloat64GrayValueMax(img image.Image, x int, y int) float64 {
 
 func GetIntGrayValuePs(img image.Image, x int, y int) int {
 	r, g, b, _ := GetFloat64RGBA(img, x, y)
-	return int(math.Pow(math.Pow(r, 2.2)+math.Pow(g, 2.2)*0.6427+math.Pow(b, 2.2)*0.0753, 1.0/2.2))
+	return int(math.Pow(math.Pow(r, 2.2)*0.2973+math.Pow(g, 2.2)*0.6427+math.Pow(b, 2.2)*0.0753, 1.0/2.2))
 }
 
 func GetUint8GrayValuePs(img image.Image, x int, y int) uint8 {
 	r, g, b, _ := GetFloat64RGBA(img, x, y)
-	return uint8(math.Pow(math.Pow(r, 2.2)+math.Pow(g, 2.2)*0.6427+math.Pow(b, 2.2)*0.0753, 1.0/2.2))
+	return uint8(math.Pow(math.Pow(r, 2.2)*0.2973+math.Pow(g, 2.2)*0.6427+math.Pow(b, 2.2)*0.0753, 1.0/2.2))
 }
 
 func GetFloat64GrayValuePs(img image.Image, x int, y int) float64 {
 	r, g, b, _ := GetFloat64RGBA(img, x, y)
-	return math.Pow(math.Pow(r, 2.2)+math.Pow(g, 2.2)*0.6427+math.Pow(b, 2.2)*0.0753, 1.0/2.2)
+	return math.Pow(math.Pow(r, 2.2)*0.2973+math.Pow(g, 2.2)*0.6427+math.Pow(b, 2.2)*0.0753, 1.0/2.2)
 }
 
 func GetIntGrayValueRChannel(img image.Image, x int, y int) int {
@@ -183,4 +183,39 @@ func GrayLevelHistGChannel(img image.Image) [256]int {
 		}
 	}
 	return sgray
+}
+
+func GetGrayMat(img image.Image, mode int) [][]int {
+	var dx, dy = GetImageBounds(img)
+	var mat [][]int
+	for i := 0; i < dx; i++ {
+		y_mat := make([]int, 0, dy)
+		for i := 0; i < dy; i++ {
+			y_mat = append(y_mat, 0)
+		}
+		mat = append(mat, y_mat)
+	}
+	for i := 0; i < dx; i++ {
+		for j := 0; j < dy; j++ {
+			var gray int
+			switch mode {
+			case 1:
+				gray = GetIntGrayValueAvg(img, i, j)
+			case 2:
+				gray = GetIntGrayValueMax(img, i, j)
+			case 3:
+				gray = GetIntGrayValuePs(img, i, j)
+			case 4:
+				gray = GetIntGrayValueWeightedMean(img, i, j)
+			case 5:
+				gray = GetIntGrayValueRChannel(img, i, j)
+			case 6:
+				gray = GetIntGrayValueGChannel(img, i, j)
+			case 7:
+				gray = GetIntGrayValueBChannel(img, i, j)
+			}
+			mat[i][j] = gray
+		}
+	}
+	return mat
 }
