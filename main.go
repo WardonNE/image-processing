@@ -85,7 +85,7 @@ func main() {
 	var threshosd int
 	var sgray [256]int
 	fmt.Println("Starting Binary Picture...")
-	sgray = GrayLevelStatWeightedMean(img)
+	sgray = GrayLevelHistWeightedMean(img)
 	threshosd = DefaultThreshosd()
 	canvas = ImageBinary(img, threshosd, mode)
 	SaveImage(dir+"defaultbinaryzation.png", canvas)

@@ -110,7 +110,7 @@ func GetFloat64GrayValueBChannel(img image.Image, x int, y int) float64 {
 	return b
 }
 
-func GrayLevelStatWeightedMean(img image.Image) [256]int {
+func GrayLevelHistWeightedMean(img image.Image) [256]int {
 	dx, dy := GetImageBounds(img)
 	var sgray [256]int
 	for k := 0; k < 256; k++ {
@@ -125,7 +125,7 @@ func GrayLevelStatWeightedMean(img image.Image) [256]int {
 	return sgray
 }
 
-func GrayLevelStatAvg(img image.Image) [256]int {
+func GrayLevelHistAvg(img image.Image) [256]int {
 	dx, dy := GetImageBounds(img)
 	var sgray [256]int
 	for k := 0; k < 256; k++ {
@@ -140,7 +140,7 @@ func GrayLevelStatAvg(img image.Image) [256]int {
 	return sgray
 }
 
-func GrayLevelStatMax(img image.Image) [256]int {
+func GrayLevelHistMax(img image.Image) [256]int {
 	dx, dy := GetImageBounds(img)
 	var sgray [256]int
 	for k := 0; k < 256; k++ {
@@ -155,7 +155,7 @@ func GrayLevelStatMax(img image.Image) [256]int {
 	return sgray
 }
 
-func GrayLevelStatRChannel(img image.Image) [256]int {
+func GrayLevelHistRChannel(img image.Image) [256]int {
 	dx, dy := GetImageBounds(img)
 	var sgray [256]int
 	for k := 0; k < 256; k++ {
@@ -170,7 +170,7 @@ func GrayLevelStatRChannel(img image.Image) [256]int {
 	return sgray
 }
 
-func GrayLevelStatGChannel(img image.Image) [256]int {
+func GrayLevelHistGChannel(img image.Image) [256]int {
 	dx, dy := GetImageBounds(img)
 	var sgray [256]int
 	for k := 0; k < 256; k++ {
