@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	filename string = "E:/goworkspace/bin/demo.jpg"
+	filename string = "E:/goworkspace/bin/lena.jpg"
 	// filename string = "F:/GoWorkspace/bin/demo.jpg"
 	canvas image.RGBA
 	dir    string = "E:/goworkspace/bin/images/"
@@ -107,5 +107,8 @@ func main() {
 	threshosd = OstuThreshosd(sgray)
 	canvas = ImageBinary(img, threshosd, mode)
 	SaveImage(dir+"otsubinaryzation.png", canvas)
+	threshosd = OneDimensionalMaxEntropyThreshosd(sgray, img)
+	canvas = ImageBinary(img, threshosd, mode)
+	SaveImage(dir+"onedimensionalmaxentropybinaryzation.png", canvas)
 	fmt.Println("Binary Picture Done!!")
 }

@@ -2,7 +2,7 @@ package main
 
 import (
 	_ "fmt"
-	_ "image"
+	"image"
 	"math"
 )
 
@@ -139,12 +139,78 @@ func OstuThreshosd(sgray [256]int) int {
 	return th
 }
 
-func OneDimensionalMaxEntropyThreshosd(sgray [256]int) int {
-	for g := 0; g < 256; i++ {
-		for gray, count := range sgray {
-			if true {
-
+func OneDimensionalMaxEntropyThreshosd(sgray [256]int, img image.Image) int {
+	var p, q [256]float64
+	var c0, c1 [256][256]float64
+	var h0, h1 [256][256]float64
+	var H [256]float64
+	var hsum0, hsum1 [256]float64
+	var dx, dy int = GetImageBounds(img)
+	for i := 0; i < 256; i++ {
+		p[i] = 0.0
+		q[i] = 0.0
+		hsum0[i] = 0.0
+		hsum1[i] = 0.0
+		H[i] = 0.0
+		for j := 0; j < 256; j++ {
+			c0[i][j] = 0.0
+			c1[i][j] = 0.0
+			h0[i][j] = 0.0
+			h1[i][j] = 0.0
+		}
+	}
+	for gray, count := range sgray {
+		p[gray] = float64(count) / float64(dx*dy)
+		q[gray] = 1 - p[gray]
+	}
+	for i := 0; i < 256; i++ {
+		for j := 1; j < i; j++ {
+			if p[i] > 0.0 {
+				c0[i][j] = p[j] / p[i]
+			} else {
+				c0[i][j] = 0
+			}
+			for k := i + 1; k < 256; k++ {
+				if q[i] > 0.0 {
+					c1[i][k] = p[k] / q[i]
+				} else {
+					c1[i][k] = 0
+				}
 			}
 		}
 	}
+	for i := 1; i < 256; i++ {
+		for j := 1; j < i; j++ {
+			if c0[i][j] != 0.0 {
+				h0[i][j] = -c0[i][j] * math.Log10(c0[i][j])
+			}
+			for k := i + 1; k < 256; k++ {
+				if c1[i][k] != 0.0 {
+					h1[i][k] = -c1[i][k] * math.Log10(c1[i][k])
+				}
+			}
+		}
+	}
+	for k, arr := range h0 {
+		for _, value := range arr {
+			hsum0[k] += value
+		}
+	}
+	for k, arr := range h1 {
+		for _, value := range arr {
+			hsum1[k] += value
+		}
+	}
+	for i := 0; i < 256; i++ {
+		H[i] = (hsum0[i] + hsum1[i])
+	}
+	var th int
+	var max float64 = 0.0
+	for gray, value := range H {
+		if value > max {
+			max = value
+			th = gray
+		}
+	}
+	return th
 }
