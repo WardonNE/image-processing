@@ -6,11 +6,11 @@ import (
 )
 
 var (
-	filename string = "E:/goworkspace/bin/lena.jpg"
-	// filename string = "F:/GoWorkspace/bin/demo.jpg"
-	canvas image.RGBA
-	dir    string = "E:/goworkspace/bin/images/"
-	// dir    string = "F:/GoWorkspace/bin/images/"
+	// filename string = "E:/goworkspace/bin/lena.png"
+	filename string = "F:/GoWorkspace/bin/demo.jpg"
+	canvas   image.RGBA
+	// dir    string = "E:/goworkspace/bin/images/"
+	dir     string  = "F:/GoWorkspace/bin/images/"
 	mode            = ASH_WEIGHTED_MEAN
 	P_Param float64 = 0.75
 )
@@ -138,7 +138,32 @@ func main() {
 	fmt.Println("Add Salt Peper Noise Done!!")
 
 	fmt.Println("Add Gauss Noise Start...")
+	canvas = AddGaussNoise(img, 0.0, 1.0, 8)
+	SaveImage(dir+"8gauss.png", canvas)
+	canvas = AddGaussNoise(img, 0.0, 1.0, 16)
+	SaveImage(dir+"16gauss.png", canvas)
+	canvas = AddGaussNoise(img, 0.0, 1.0, 32)
+	SaveImage(dir+"32gauss.png", canvas)
 	canvas = AddGaussNoise(img, 0.0, 1.0, 64)
 	SaveImage(dir+"64gauss.png", canvas)
+	canvas = AddGaussNoise(img, 0.0, 1.0, 128)
+	SaveImage(dir+"128gauss.png", canvas)
+	canvas = AddGaussNoise(img, 0.0, 1.0, 256)
+	SaveImage(dir+"256gauss.png", canvas)
 	fmt.Println("Add Gauss Noise Done!!")
+
+	fmt.Println("Add Poisson Noise Start...")
+	canvas = AddPoissonNoise(img, 9, 2)
+	SaveImage(dir+"9poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 16, 2)
+	SaveImage(dir+"16poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 25, 2)
+	SaveImage(dir+"25poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 36, 2)
+	SaveImage(dir+"36poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 49, 2)
+	SaveImage(dir+"49poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 100, 2)
+	SaveImage(dir+"100poisson.png", canvas)
+	fmt.Println("Add Poisson Noise Done!!")
 }
