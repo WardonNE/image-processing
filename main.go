@@ -136,4 +136,9 @@ func main() {
 	canvas = AddSaleAndPeperNoist(img, 0.80)
 	SaveImage(dir+"80saltandpeper.png", canvas)
 	fmt.Println("Add Salt Peper Noise Done!!")
+
+	fmt.Println("Add Gauss Noise Start...")
+	canvas = AddGaussNoise(img, 0.0, 1.0, 64)
+	SaveImage(dir+"64gauss.png", canvas)
+	fmt.Println("Add Gauss Noise Done!!")
 }
