@@ -1,0 +1,26 @@
+package main
+
+const (
+	ASH_AVG           int = 1
+	ASH_MAX           int = 2
+	ASH_PS            int = 3
+	ASH_WEIGHTED_MEAN int = 4
+	ASH_RED_CHANNEL   int = 5
+	ASH_GREEN_CHANNEL int = 6
+	ASH_BLUE_CHANNEL  int = 7
+
+	POSITION_LEFT_TOP      int = 1
+	POSITION_CENTER_TOP    int = 2
+	POSITION_RIGHT_TOP     int = 3
+	POSITION_LEFT_MIDDLE   int = 4
+	POSITION_CENTER_MIDDLE int = 5
+	POSITION_RIGHT_MIDDLE  int = 6
+	POSITION_LEFT_BUTTON   int = 7
+	POSITION_CENTER_BUTTON int = 8
+	POSITION_RIGHT_BUTTON  int = 9
+
+	MAX_CHANNEL_VALUE uint8 = 255
+	MIN_CHANNEL_VALUE uint8 = 0
+
+	DEFAULT_THRESHOSD int = 127
+)
