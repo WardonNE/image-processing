@@ -7,18 +7,6 @@ import (
 	"math"
 )
 
-const (
-	POSITION_LEFT_TOP      int = 1
-	POSITION_CENTER_TOP    int = 2
-	POSITION_RIGHT_TOP     int = 3
-	POSITION_LEFT_MIDDLE   int = 4
-	POSITION_CENTER_MIDDLE int = 5
-	POSITION_RIGHT_MIDDLE  int = 6
-	POSITION_LEFT_BUTTON   int = 7
-	POSITION_CENTER_BUTTON int = 8
-	POSITION_RIGHT_BUTTON  int = 9
-)
-
 func QuickCut(img image.Image, position int) image.RGBA {
 	x, y := GetImageBounds(img)
 	w := int(math.Ceil(float64(x / 3)))

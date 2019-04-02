@@ -6,10 +6,6 @@ import (
 	"math"
 )
 
-const (
-	DEFAULT_THRESHOSD int = 127
-)
-
 func DefaultThreshosd() int {
 	return DEFAULT_THRESHOSD
 }
