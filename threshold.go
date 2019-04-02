@@ -214,3 +214,28 @@ func OneDimensionalMaxEntropyThreshosd(sgray [256]int, img image.Image) int {
 	}
 	return th
 }
+
+func PParamMethodThreshosd(sgray [256]int, p float64, t float64) int {
+	var th int = 0
+	var P float64 = 0.0
+	for g := 1; g < 254; g++ {
+		var Pasum, Pbsum int = 0, 0
+		for gray, count := range sgray {
+			if gray > g {
+				Pasum += count
+			} else {
+				Pbsum += count
+			}
+		}
+		P = float64(Pasum) / float64(Pasum+Pbsum)
+		if math.Abs(P-p) < t {
+			th = g
+			break
+		} else {
+			Pasum = 0
+			Pbsum = 0
+			P = 0.0
+		}
+	}
+	return th
+}

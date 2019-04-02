@@ -11,7 +11,8 @@ var (
 	canvas image.RGBA
 	dir    string = "E:/goworkspace/bin/images/"
 	// dir    string = "F:/GoWorkspace/bin/images/"
-	mode = ASH_WEIGHTED_MEAN
+	mode            = ASH_WEIGHTED_MEAN
+	P_Param float64 = 0.75
 )
 
 func main() {
@@ -110,5 +111,8 @@ func main() {
 	threshosd = OneDimensionalMaxEntropyThreshosd(sgray, img)
 	canvas = ImageBinary(img, threshosd, mode)
 	SaveImage(dir+"onedimensionalmaxentropybinaryzation.png", canvas)
+	threshosd = PParamMethodThreshosd(sgray, P_Param, 0.01)
+	canvas = ImageBinary(img, threshosd, mode)
+	SaveImage(dir+"pparammethodbinaryzation.png", canvas)
 	fmt.Println("Binary Picture Done!!")
 }
