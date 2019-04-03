@@ -11,16 +11,6 @@ var (
 	white = color.RGBA{uint8(0), uint8(0), uint8(0), uint8(255)}
 )
 
-const (
-	ASH_AVG           int = 1
-	ASH_MAX           int = 2
-	ASH_PS            int = 3
-	ASH_WEIGHTED_MEAN int = 4
-	ASH_RED_CHANNEL   int = 5
-	ASH_GREEN_CHANNEL int = 6
-	ASH_BLUE_CHANNEL  int = 7
-)
-
 func ImageBinary(img image.Image, threshosd int, mode int) image.RGBA {
 	width, height := GetImageBounds(img)
 	canvas := CreateCanvas(width, height)

@@ -1,5 +1,5 @@
 package main
 
 import (
-	"image"
+	_ "image"
 )
