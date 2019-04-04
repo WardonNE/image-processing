@@ -6,11 +6,11 @@ import (
 )
 
 var (
-	filename string = "E:/goworkspace/bin/lena.jpg"
-	// filename string = "F:/GoWorkspace/bin/demo.jpg"
-	canvas image.RGBA
-	dir    string = "E:/goworkspace/bin/images/"
-	// dir     string  = "F:/GoWorkspace/bin/images/"
+	// filename string = "E:/goworkspace/bin/lena.jpg"
+	filename string = "F:/GoWorkspace/bin/demo.jpg"
+	canvas   image.RGBA
+	// dir    string = "E:/goworkspace/bin/images/"
+	dir     string  = "F:/GoWorkspace/bin/images/"
 	mode            = ASH_WEIGHTED_MEAN
 	P_Param float64 = 0.75
 )
@@ -45,23 +45,23 @@ func main() {
 	fmt.Println("Quick Cut Picture Done!!")
 
 	fmt.Println("Starting Simple Cut Picture...")
-	canvas = SimpleCut(img, 720, 540, 1)
+	canvas = SimpleCut(img, 360, 240, 1)
 	SaveImage(dir+"simple_cut/left_top.png", canvas)
-	canvas = SimpleCut(img, 720, 540, 2)
+	canvas = SimpleCut(img, 360, 240, 2)
 	SaveImage(dir+"simple_cut/center_top.png", canvas)
-	canvas = SimpleCut(img, 720, 540, 3)
+	canvas = SimpleCut(img, 360, 240, 3)
 	SaveImage(dir+"simple_cut/right_top.png", canvas)
-	canvas = SimpleCut(img, 720, 540, 4)
+	canvas = SimpleCut(img, 360, 240, 4)
 	SaveImage(dir+"simple_cut/left_middle.png", canvas)
-	canvas = SimpleCut(img, 720, 540, 5)
+	canvas = SimpleCut(img, 360, 240, 5)
 	SaveImage(dir+"simple_cut/center_middle.png", canvas)
-	canvas = SimpleCut(img, 720, 540, 6)
+	canvas = SimpleCut(img, 360, 240, 6)
 	SaveImage(dir+"simple_cut/right_middle.png", canvas)
-	canvas = SimpleCut(img, 720, 540, 7)
+	canvas = SimpleCut(img, 360, 240, 7)
 	SaveImage(dir+"simple_cut/left_button.png", canvas)
-	canvas = SimpleCut(img, 720, 540, 8)
+	canvas = SimpleCut(img, 360, 240, 8)
 	SaveImage(dir+"simple_cut/center_button.png", canvas)
-	canvas = SimpleCut(img, 720, 540, 9)
+	canvas = SimpleCut(img, 360, 240, 9)
 	SaveImage(dir+"simple_cut/right_button.png", canvas)
 	fmt.Println("Simple Cut Picture Done!!")
 
@@ -152,20 +152,20 @@ func main() {
 	SaveImage(dir+"gaussnoise/256gauss.png", canvas)
 	fmt.Println("Add Gauss Noise Done!!")
 
-	// fmt.Println("Add Poisson Noise Start...")
-	// canvas = AddPoissonNoise(img, 9, 2)
-	// SaveImage(dir+"poissonnoise/9poisson.png", canvas)
-	// canvas = AddPoissonNoise(img, 16, 2)
-	// SaveImage(dir+"poissonnoise/16poisson.png", canvas)
-	// canvas = AddPoissonNoise(img, 25, 2)
-	// SaveImage(dir+"poissonnoise/25poisson.png", canvas)
-	// canvas = AddPoissonNoise(img, 36, 2)
-	// SaveImage(dir+"poissonnoise/36poisson.png", canvas)
-	// canvas = AddPoissonNoise(img, 49, 2)
-	// SaveImage(dir+"poissonnoise/49poisson.png", canvas)
-	// canvas = AddPoissonNoise(img, 100, 2)
-	// SaveImage(dir+"poissonnoise/100poisson.png", canvas)
-	// fmt.Println("Add Poisson Noise Done!!")
+	fmt.Println("Add Poisson Noise Start...")
+	canvas = AddPoissonNoise(img, 9, 2)
+	SaveImage(dir+"poissonnoise/9poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 16, 2)
+	SaveImage(dir+"poissonnoise/16poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 25, 2)
+	SaveImage(dir+"poissonnoise/25poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 36, 2)
+	SaveImage(dir+"poissonnoise/36poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 49, 2)
+	SaveImage(dir+"poissonnoise/49poisson.png", canvas)
+	canvas = AddPoissonNoise(img, 100, 2)
+	SaveImage(dir+"poissonnoise/100poisson.png", canvas)
+	fmt.Println("Add Poisson Noise Done!!")
 
 	fmt.Println("Resize Picture Start...")
 	canvas = ScaleImage(img, 0.1, 1)
