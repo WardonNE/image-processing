@@ -168,6 +168,13 @@ func main() {
 	// fmt.Println("Add Poisson Noise Done!!")
 
 	fmt.Println("Resize Picture Start...")
-	ScaleImage(img, 0.01)
+	canvas = ScaleImage(img, 0.1, 1)
+	SaveImage(dir+"scale/0.1nearestneightor.png", canvas)
+	canvas = ScaleImage(img, 0.5, 1)
+	SaveImage(dir+"scale/0.5nearestneightor.png", canvas)
+	canvas = ScaleImage(img, 1.5, 1)
+	SaveImage(dir+"scale/1.5nearestneightor.png", canvas)
+	canvas = ScaleImage(img, 2.0, 1)
+	SaveImage(dir+"scale/2.0nearestneightor.png", canvas)
 	fmt.Println("Resize Picture Done!!")
 }

@@ -23,4 +23,6 @@ const (
 	MIN_CHANNEL_VALUE uint8 = 0
 
 	DEFAULT_THRESHOSD int = 127
+
+	NEAREST_NEIGHBOR int = 1
 )
