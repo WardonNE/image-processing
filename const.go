@@ -24,5 +24,6 @@ const (
 
 	DEFAULT_THRESHOSD int = 127
 
-	NEAREST_NEIGHBOR int = 1
+	NEAREST  int = 1
+	BILINEAR int = 2
 )

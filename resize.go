@@ -1,6 +1,7 @@
 package main
 
 import (
+	// "fmt"
 	"image"
 	"image/color"
 	"math"
@@ -20,8 +21,10 @@ func ScaleImage(img image.Image, r float64, t int) image.RGBA {
 		for j := 0; j < h; j++ {
 			var R, G, B, A uint8
 			switch t {
-			case NEAREST_NEIGHBOR:
+			case NEAREST:
 				R, G, B, A = nearest(img, i, j, r, r)
+			case BILINEAR:
+				R, G, B, A = bilinear(img, i, j, r, r)
 			}
 			canvas.SetRGBA(i, j, color.RGBA{R, G, B, A})
 		}
@@ -36,20 +39,21 @@ func nearest(img image.Image, x, y int, xscale, yscale float64) (uint8, uint8, u
 	return r, g, b, a
 }
 
-// func bilinear(x, y int, xscale, yscale float64) (int, int) {
-// 	var x0, y0 float64
-// 	x0 = float64(x) * (1.0 / xscale)
-// 	y0 = float64(y) * (1.0 / yscale)
-// 	var vx, ux, vy, uy float64 = x0 - x, 1.0 - vx, y0 - y, 1.0 - vy
-// 	var (
-// 		lt = image.Point{int(math.Floor(x0)), int(math.Floor(y0))}
-// 		lb = image.Point{int(math.Floor(x0)), math.Ceil(y0)}
-// 		rt = image.Point{math.Ceil(x0), math.Ceil(y0)}
-// 		rb = image.Point{math.Ceil(x0), math.Floor(y0)}
-// 	)
-// 	var r, g, b, a uint8
-// 	ltR, ltG, ltB, ltA := GetFloat64RGBA(img, lt.X, lt.Y)
-// 	lbR, lbG, lbB, lbA := GetFloat64RGBA(img, lb.X, lb.Y)
-// 	rtR, rtG, rtB, rtA := GetFloat64RGBA(img, rt.X, rt.Y)
-// 	rbR, rbG, rbB, rbA := GetFloat64RGBA(img, rt.X, rt.Y)
-// }
+func bilinear(img image.Image, x, y int, xscale, yscale float64) (uint8, uint8, uint8, uint8) {
+	var x0, y0 float64
+	x0 = (float64(x)+0.5)*(1.0/xscale) - 0.5
+	y0 = (float64(y)+0.5)*(1.0/yscale) - 0.5
+	ltR, ltG, ltB, _ := GetFloat64RGBA(img, int(math.Floor(x0)), int(math.Floor(y0)))
+	lbR, lbG, lbB, _ := GetFloat64RGBA(img, int(math.Floor(x0)), int(math.Ceil(y0)))
+	rtR, rtG, rtB, _ := GetFloat64RGBA(img, int(math.Ceil(x0)), int(math.Floor(y0)))
+	rbR, rbG, rbB, _ := GetFloat64RGBA(img, int(math.Ceil(x0)), int(math.Ceil(y0)))
+	var v, u float64
+	v = y0 - float64(math.Floor(y0))
+	u = x0 - float64(math.Floor(x0))
+	var res color.RGBA
+	res.R = uint8((1.0-u)*(1.0-v)*ltR + (1.0-u)*v*lbR + u*(1-v)*rtR + u*v*rbR)
+	res.G = uint8((1.0-u)*(1.0-v)*ltG + (1.0-u)*v*lbG + u*(1-v)*rtG + u*v*rbG)
+	res.B = uint8((1.0-u)*(1.0-v)*ltB + (1.0-u)*v*lbB + u*(1-v)*rtB + u*v*rbB)
+	res.A = uint8(255)
+	return res.R, res.G, res.B, res.A
+}
