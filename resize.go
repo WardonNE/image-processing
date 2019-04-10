@@ -57,3 +57,15 @@ func bilinear(img image.Image, x, y int, xscale, yscale float64) (uint8, uint8, 
 	res.A = uint8(255)
 	return res.R, res.G, res.B, res.A
 }
+
+func bicubic(img image.Image, x, y int, xscale, yscale float64) (uint8, uint8, uint8, uint8) {
+	var p = vPoint{
+		X: float64(x) * (1.0 / xscale),
+		Y: float64(y) * (1.0 / yscale),
+	}
+	for i := 0; i <= 3; i++ {
+		for j := 0; j <= 3; j++ {
+
+		}
+	}
+}
