@@ -26,4 +26,5 @@ const (
 
 	NEAREST  int = 1
 	BILINEAR int = 2
+	BICUBIC  int = 3
 )
