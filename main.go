@@ -194,5 +194,13 @@ func main() {
 	SaveImage(dir+"scale/1.5bicubic.png", canvas)
 	canvas = ScaleImage(img, 2.0, 3)
 	SaveImage(dir+"scale/2.0bicubic.png", canvas)
+
+	canvas = Resize(img, 100, 200, 1)
+	SaveImage(dir+"scale/resizenearest.png", canvas)
+	canvas = Resize(img, 100, 200, 2)
+	SaveImage(dir+"scale/resizebiliner.png", canvas)
+	canvas = Resize(img, 100, 200, 3)
+	SaveImage(dir+"scale/resizebicubic.png", canvas)
+
 	fmt.Println("Resize Picture Done!!")
 }

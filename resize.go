@@ -34,6 +34,28 @@ func ScaleImage(img image.Image, r float64, t int) image.RGBA {
 	return canvas
 }
 
+func Resize(img image.Image, x, y, t int) image.RGBA {
+	var dx, dy int = GetImageBounds(img)
+	var canvas = CreateCanvas(x, y)
+	var xscale float64 = float64(x) / float64(dx)
+	var yscale float64 = float64(y) / float64(dy)
+	for i := 0; i <= x; i++ {
+		for j := 0; j <= y; j++ {
+			var R, G, B, A uint8
+			switch t {
+			case NEAREST:
+				R, G, B, A = nearest(img, i, j, xscale, yscale)
+			case BILINEAR:
+				R, G, B, A = bilinear(img, i, j, xscale, yscale)
+			case BICUBIC:
+				R, G, B, A = bicubic(img, i, j, xscale, yscale)
+			}
+			canvas.SetRGBA(i, j, color.RGBA{R, G, B, A})
+		}
+	}
+	return canvas
+}
+
 func nearest(img image.Image, x, y int, xscale, yscale float64) (uint8, uint8, uint8, uint8) {
 	x0 := int(float64(x) * (1.0 / xscale))
 	y0 := int(float64(y) * (1.0 / yscale))
