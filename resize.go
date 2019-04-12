@@ -159,3 +159,21 @@ func getW_y(point_y [4]int, y0 float64) [4]float64 {
 	w_y[3] = a*math.Abs(step_y[3]*step_y[3]*step_y[3]) - 5.0*a*step_y[3]*step_y[3] + 8.0*a*math.Abs(step_y[3]) - 4.0*a
 	return w_y
 }
+
+func mitchellNetravali(x0, y0 float64) (uint8, uint8, uint8, uint8) {
+	var B, C float64 = 1.0 / 3.0
+	var d float64 = math.Sqrt(math.Pow(x0-round(x0), 2) + math.Pow((y0-int(y0)), 2))
+	type float64RGB struct {
+		R, G, B, A float64
+	}
+	var P0, P1, P2, P3 float64RGBA
+	P0.R, P0.G, P0.B, P0.A = GetFloat64RGBA(img, int(x0), int(y0))
+	P1.R, P1.G, P1.B, P1.A = GetFloat64RGBA(img, round(x0), int(y0))
+	R2.R, P2.G, P2.B, P2.A = GetFloat64RGBA(img, int(x0), round(y0))
+	R3.R, P3.G, P3.B, P3.A = GetFloat64RGBA(img, round(x0), round(y0))
+	var r, g, b float64
+	r = ((-1.0/6.0*B-C)*P0.R+(-3.0/2.0*B-C+2.0)*P1.R+(3.0/2.0*B+C-2.0)*P2.R+(1.0/6.0*B+C)*P3.R)*math.Pow(d, 3) + ((1.0/2.0*B+2.0*C)*P0.R+(2.0*B+C-3.0)*P1.R+(-5.0/2.0*B-2.0*C+3.0)*P2.R-C*P3.R)*math.Pow(d, 2) + ((-1.0/2.0*B-C)*P0.R+(1.0/2.0*B+C)*P2.R)*d + 1.0/6.0*B*P0.R + (-1.0/3.0*B+1.0)*P1.R + 1.0/6.0*B*P2.R
+	g = ((-1.0/6.0*B-C)*P0.G+(-3.0/2.0*B-C+2.0)*P1.G+(3.0/2.0*B+C-2.0)*P2.G+(1.0/6.0*B+C)*P3.G)*math.Pow(d, 3) + ((1.0/2.0*B+2.0*C)*P0.G+(2.0*B+C-3.0)*P1.G+(-5.0/2.0*B-2.0*C+3.0)*P2.G-C*P3.G)*math.Pow(d, 2) + ((-1.0/2.0*B-C)*P0.G+(1.0/2.0*B+C)*P2.G)*d + 1.0/6.0*B*P0.G + (-1.0/3.0*B+1.0)*P1.G + 1.0/6.0*B*P2.G
+	b = ((-1.0/6.0*B-C)*P0.B+(-3.0/2.0*B-C+2.0)*P1.B+(3.0/2.0*B+C-2.0)*P2.B+(1.0/6.0*B+C)*P3.B)*math.Pow(d, 3) + ((1.0/2.0*B+2.0*C)*P0.B+(2.0*B+C-3.0)*P1.B+(-5.0/2.0*B-2.0*C+3.0)*P2.B-C*P3.B)*math.Pow(d, 2) + ((-1.0/2.0*B-C)*P0.B+(1.0/2.0*B+C)*P2.B)*d + 1.0/6.0*B*P0.B + (-1.0/3.0*B+1.0)*P1.B + 1.0/6.0*B*P2.B
+	return uint8(r), uint8(g), uint8(b), MAX_CHANNEL_VALUE
+}
