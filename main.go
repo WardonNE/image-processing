@@ -6,11 +6,11 @@ import (
 )
 
 var (
-	filename string = "E:/goworkspace/bin/lena.jpg"
-	// filename string = "F:/GoWorkspace/bin/demo.jpg"
-	canvas image.RGBA
-	dir    string = "E:/goworkspace/bin/images/"
-	// dir     string  = "F:/GoWorkspace/bin/images/"
+	// filename string = "E:/goworkspace/bin/lena.jpg"
+	filename string = "F:/GoWorkspace/bin/demo.jpg"
+	canvas   image.RGBA
+	// dir    string = "E:/goworkspace/bin/images/"
+	dir     string  = "F:/GoWorkspace/bin/images/"
 	mode            = ASH_WEIGHTED_MEAN
 	P_Param float64 = 0.75
 )
